@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Max;
 
 @Entity
 @Data
@@ -23,7 +23,7 @@ public class Author {
     private String name;
 
     @Column(nullable = false)
-    @Size(max = 100)
+    @Max(100)
     private Integer age;
 
 }

@@ -3,21 +3,19 @@ package com.rafaeldias.bookstoremanager.service;
 
 import com.rafaeldias.bookstoremanager.dto.BookDTO;
 import com.rafaeldias.bookstoremanager.entity.Book;
+import com.rafaeldias.bookstoremanager.exception.BookNotFoundException;
 import com.rafaeldias.bookstoremanager.repository.BookRepository;
-import com.rafaeldias.bookstoremanager.utils.BookUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static com.rafaeldias.bookstoremanager.utils.BookUtils.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static com.rafaeldias.bookstoremanager.utils.BookUtils.createFakeBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class BookServiceTest {
@@ -29,7 +27,7 @@ public class BookServiceTest {
     private BookService bookService;
 
     @Test
-    void whenGivenExistingIdThenReturnThisBook() {
+    void whenGivenExistingIdThenReturnThisBook() throws BookNotFoundException {
         Book expectedFoundBook = createFakeBook();
 
         when(bookRepository.findById(expectedFoundBook.getId())).thenReturn(Optional.of(expectedFoundBook));
